@@ -1,0 +1,17 @@
+<h1> Title New with Url</h1>
+<div>
+    <input [(ngModel)]="searchTerm" placeholder="Search News">
+    <button (click)="search()">Search</button>
+  </div>
+  
+  <ul>
+    <li *ngFor="let story of newestStories">
+      <a *ngIf="story.urlPath" [href]="story.urlPath" target="_blank">{{ story.title }}</a>
+      <span *ngIf="!story.urlPath">{{ story.title }}</span>
+    </li>
+  </ul>
+  
+  <div>
+    <button *ngFor="let page of [1, 2, 3, 4, 5, 6, 7, 8 ,9 ,10]" (click)="onPageChange(page)">{{ page }}</button>
+  </div>
+ 

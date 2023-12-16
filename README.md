@@ -1,6 +1,6 @@
 # HackerNewsApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7. i am getting 10 record per request for testing purpose.
 
 ## Development server
 

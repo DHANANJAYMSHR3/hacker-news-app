@@ -20,7 +20,7 @@ export class NewsListComponent implements OnInit {
   id=0;
   start=0;
   end =200;
-  searchedItem: any;
+  
 
  constructor(private hackerNewsService: HackerNewsService,private cdr: ChangeDetectorRef) {}
   
@@ -29,24 +29,16 @@ export class NewsListComponent implements OnInit {
   }
 
   loadNewestStories(): void {
-    
-   
     this.hackerNewsService.getNewestStories()
       .subscribe(data => this.newestStories = data.slice(this.start,this.end));
       
   }
   loadNewestStoryDetail(): void {
-    
     this.hackerNewsService.geNewsStoriesDetail(this.id)
       .subscribe(data => this.newestStoriesDetail = [data]);
-
-     
-      // console.log(this.newestStoriesDetail);
-      // this.cdr.detectChanges();
   }
 
   search(): void {
-    
     this.newestStories =this.newestStories.filter(item => item.id === +this.searchTerm );
     
   }
@@ -60,6 +52,6 @@ export class NewsListComponent implements OnInit {
     event.preventDefault();
     this.id = parameter
     this.loadNewestStoryDetail()
-    //console.log('Clicked with parameter:', parameter);
+    
   }
 }

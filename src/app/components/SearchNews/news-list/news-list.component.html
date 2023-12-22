@@ -1,15 +1,14 @@
 <h1> Title New with Url</h1>
 <div *ngIf="newestStoriesDetail.length === 0">
 <div>
-    <input [(ngModel)]="searchTerm" placeholder="Search News">
-    <button (click)="search()">Search</button>
+    <input type="text" (keyup)="onKeyUp($event)" placeholder="Search by title"/>
+    
   </div>
   
-  <ul>
-    <li *ngFor="let story of newestStories">
-      <a *ngIf="story.id"  href="#" (click)="myMethod($event,story.id)"  >{{ story.id }}</a>
-    </li>
-  </ul>
+  <div *ngFor="let item of ids">
+    <a *ngIf="titles[item.id].url" [href]="titles[item.id].url" target="_blank">{{ titles[item.id].title}}</a>
+    
+  </div>
   
   <div>
     <button  (click)="onPageChange(0,200)">show 0 to 200</button>
@@ -17,20 +16,5 @@
     <button  (click)="onPageChange(401,600)">show 401 to 600</button>
  </div>
 </div>
- <!-- <div *ngIf="newestStoriesDetail.length !== 0"> -->
-  <div *ngIf="newestStoriesDetail.length !== 0">
-    <div *ngFor="let storych of newestStoriesDetail">
-      <!-- {{ storych}} -->
-      <div>"by" : "{{ storych.by }}",</div>
-      <div>"descendants" : {{ storych.descendants }},</div>
-      <div>"id" : {{ storych.id }},</div>
-      <div>"kids" : [{{ storych.kids }}],</div>
-      <div>"score" : {{ storych.score }},</div>
-      <div>"time" : {{ storych.time }},</div>
-      <div>"title" : "{{ storych.title }}",</div>
-      <div>"type" : "{{ storych.type }}",</div>
-      "url" : <a *ngIf="storych.url" [href]="storych.url" target="_blank">"{{ storych.url}}"</a>
-      </div>
-    
-</div>
- 
+
+  

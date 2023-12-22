@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HackerNewsService } from '../hacker-news.service';
+import { HackerNewschildService } from '../hacker-newschild.service';
 import { NgFor,NgIf } from "@angular/common";
 import { FormsModule }   from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 
 
 @Component({
@@ -20,38 +22,48 @@ export class NewsListComponent implements OnInit {
   id=0;
   start=0;
   end =200;
+  ids: { id: number }[] =[];
+  //ids: [] = [];
+  titles: { [id: number]: { title: string; url: string } } = {};
   
 
- constructor(private hackerNewsService: HackerNewsService,private cdr: ChangeDetectorRef) {}
+ constructor(private hackerNewsService: HackerNewsService,private hackerNewschildService:HackerNewschildService,private cdr: ChangeDetectorRef) {}
   
-  ngOnInit(): void {
-    this.loadNewestStories();
-  }
+ ngOnInit() {
+  this.loadNewestStories();
+  
+}
 
   loadNewestStories(): void {
-    this.hackerNewsService.getNewestStories()
-      .subscribe(data => this.newestStories = data.slice(this.start,this.end));
+    this.hackerNewsService.getNewestStories().subscribe((id) => {
+      this.ids= id.slice(this.start,this.end);
+      this.fetchTitles();
       
-  }
-  loadNewestStoryDetail(): void {
-    this.hackerNewsService.geNewsStoriesDetail(this.id)
-      .subscribe(data => this.newestStoriesDetail = [data]);
-  }
-
-  search(): void {
-    this.newestStories =this.newestStories.filter(item => item.id === +this.searchTerm );
+    });
+      
     
   }
+ 
+  fetchTitles() {
+    for (let id of this.ids) {
+      this.hackerNewschildService.geNewsStoriesDetail(id.id).subscribe((data) => {
+        this.titles[id.id] = { title: String(data.title), url: String(data.url) };
+        
+      });
+    }
+  }
 
+
+  onKeyUp(event: any): void {
+    const searchTerm = event.target.value.toLowerCase();
+    for (let id of this.ids) {
+       this.titles[id.id].title.toLowerCase().includes(searchTerm)
+    }
+    
+  }
   onPageChange(start: number,end :number): void {
     this.start=start;
     this.end=end;
     this.loadNewestStories();
-  }
-  myMethod(event: Event,parameter: number) {
-    event.preventDefault();
-    this.id = parameter
-    this.loadNewestStoryDetail()
-    
   }
 }

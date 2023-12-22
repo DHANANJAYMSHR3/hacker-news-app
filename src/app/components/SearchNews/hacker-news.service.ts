@@ -11,13 +11,15 @@ export class HackerNewsService {
 
   constructor(private http: HttpClient) {}
 
-  getNewestStories(page: number, itemsPerPage: number, searchTerm?: string): Observable<any> {
-    let params = new HttpParams().set('page', page);
-    params = params.set('itemsPerPage', itemsPerPage);
-    if (searchTerm) {
-      params = params.set('searchTerm', searchTerm);
-    }
-
-    return this.http.get(Global.BASE_API_PATH +"Story/GetStories", { params });
+  getNewestStories(): Observable<any>
+  {
+    return this.http.get(Global.BASE_API_PATH +"Story/GetStories");
   }
+
+  geNewsStoriesDetail(id: number): Observable<any>
+  {
+     let params = new HttpParams().set('id', id);
+     return this.http.get(Global.BASE_API_PATH +"Story/GetStoryDetail", { params });
+  }
+
 }

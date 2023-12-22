@@ -1,6 +1,8 @@
 # HackerNewsApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7. i am getting 10 record per request for testing purpose.
+"hacker-news-app-master\src\app\components\SearchNews\news-list\news-list.component.ts"  this is file where search opertion and done.
+hacker-news-app-master\src\app  this is path where app.component.ts file available    For running app path is [(http://localhost:4200/news)
 
 ## Development server
 

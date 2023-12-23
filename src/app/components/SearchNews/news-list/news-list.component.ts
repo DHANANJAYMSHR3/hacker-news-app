@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HackerNewsService } from '../hacker-news.service';
 import { HackerNewschildService } from '../hacker-newschild.service';
-import { NgFor,NgIf } from "@angular/common";
+import { NgFor,NgIf,KeyValue } from "@angular/common";
 import { FormsModule }   from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,14 +16,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './news-list.component.css'
 })
 export class NewsListComponent implements OnInit {
-  newestStories: any[] = [];
-  newestStoriesDetail: any[] = []; 
-  searchTerm = 0;
-  id=0;
+   
+ 
   start=0;
   end =200;
   ids: { id: number }[] =[];
-  //ids: [] = [];
   titles: { [id: number]: { title: string; url: string } } = {};
   
 
@@ -54,13 +51,7 @@ export class NewsListComponent implements OnInit {
   }
 
 
-  onKeyUp(event: any): void {
-    const searchTerm = event.target.value.toLowerCase();
-    for (let id of this.ids) {
-       this.titles[id.id].title.toLowerCase().includes(searchTerm)
-    }
-    
-  }
+ 
   onPageChange(start: number,end :number): void {
     this.start=start;
     this.end=end;

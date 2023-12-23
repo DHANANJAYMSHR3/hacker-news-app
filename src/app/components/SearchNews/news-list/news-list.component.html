@@ -1,20 +1,18 @@
-<h1> Title New with Url</h1>
-<div *ngIf="newestStoriesDetail.length === 0">
-<div>
-    <input type="text" (keyup)="onKeyUp($event)" placeholder="Search by title"/>
-    
-  </div>
-  
-  <div *ngFor="let item of ids">
-    <a *ngIf="titles[item.id].url" [href]="titles[item.id].url" target="_blank">{{ titles[item.id].title}}</a>
-    
-  </div>
+ <h1> Title New with Url</h1>
+
+
+  <ul>
+    <li *ngFor="let title of titles | keyvalue">
+      <a *ngIf="title.value.url" [href]="title.value.url" target="_blank">{{ title.value.title }}</a>
+    </li>
+  </ul>
+ 
   
   <div>
     <button  (click)="onPageChange(0,200)">show 0 to 200</button>
     <button  (click)="onPageChange(201,400)">show 201 to 400</button>
     <button  (click)="onPageChange(401,600)">show 401 to 600</button>
- </div>
-</div>
+ </div> 
 
-  
+
+ 

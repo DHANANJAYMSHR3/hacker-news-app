@@ -16,8 +16,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './news-list.component.css'
 })
 export class NewsListComponent implements OnInit {
-   
- 
   start=0;
   end =200;
   ids: { id: number }[] =[];
@@ -30,15 +28,12 @@ export class NewsListComponent implements OnInit {
   this.loadNewestStories();
   
 }
-
-  loadNewestStories(): void {
+ loadNewestStories(): void {
     this.hackerNewsService.getNewestStories().subscribe((id) => {
       this.ids= id.slice(this.start,this.end);
       this.fetchTitles();
       
     });
-      
-    
   }
  
   fetchTitles() {
@@ -49,9 +44,6 @@ export class NewsListComponent implements OnInit {
       });
     }
   }
-
-
- 
   onPageChange(start: number,end :number): void {
     this.start=start;
     this.end=end;
